@@ -47,8 +47,9 @@ namespace dotnet_redis.Controllers {
     public async Task<IActionResult> SetAsync () {
       var key = "abc";
       var obj = new WeatherForecast { Date = DateTime.Now, TemperatureC = 1, Summary = "ABC" };
-      var data = JsonSerializer.Serialize (obj);
-      var byteData = Encoding.UTF8.GetBytes (data);
+      // var data = JsonSerializer.Serialize (obj);
+      // var byteData = Encoding.UTF8.GetBytes (data);
+      var byteData = JsonSerializer.SerializeToUtf8Bytes (obj);
       var options = new DistributedCacheEntryOptions ();
       options.SetSlidingExpiration (TimeSpan.FromSeconds (10));
 

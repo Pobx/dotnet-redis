@@ -28,6 +28,8 @@ namespace dotnet_redis {
         c.SwaggerDoc ("v1", new OpenApiInfo { Title = "dotnet_redis", Version = "v1" });
       });
 
+      Console.WriteLine($"================> {Configuration.GetValue<string> ("InstanceName")}");
+
       services.AddStackExchangeRedisCache (options => {
         options.Configuration = Configuration.GetConnectionString ("redis");
         options.InstanceName = Configuration.GetValue<string> ("InstanceName");
