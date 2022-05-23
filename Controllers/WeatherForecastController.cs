@@ -34,11 +34,12 @@ namespace dotnet_redis.Controllers {
     [HttpPost ("SetStringAsync")]
     public async Task<IActionResult> SetStringAsync () {
       var key = "abc";
-      var obj = new WeatherForecast { Date = DateTime.Now, TemperatureC = 1, Summary = "ABC" };
+      var obj = new WeatherForecast { Date = DateTime.Now, TemperatureC = 1, Summary = "ABC ทดสอบ <script>alert(1)</script>" };
       var data = JsonSerializer.Serialize (obj);
       var options = new DistributedCacheEntryOptions ();
       options.SetSlidingExpiration (TimeSpan.FromSeconds (10));
 
+      Console.WriteLine ($"SetStringAsync Byte Count====> {data.Length}");
       await _cache.SetStringAsync (key, data, options);
       return Created (String.Empty, obj);
     }
@@ -46,13 +47,14 @@ namespace dotnet_redis.Controllers {
     [HttpPost ("SetAsync")]
     public async Task<IActionResult> SetAsync () {
       var key = "abc";
-      var obj = new WeatherForecast { Date = DateTime.Now, TemperatureC = 1, Summary = "ABC" };
+      var obj = new WeatherForecast { Date = DateTime.Now, TemperatureC = 1, Summary = "ABC ทดสอบ <script>alert(1)</script>" };
       // var data = JsonSerializer.Serialize (obj);
       // var byteData = Encoding.UTF8.GetBytes (data);
       var byteData = JsonSerializer.SerializeToUtf8Bytes (obj);
       var options = new DistributedCacheEntryOptions ();
       options.SetSlidingExpiration (TimeSpan.FromSeconds (10));
 
+      Console.WriteLine ($"SetAsync Byte Count====> {byteData.Length}");
       await _cache.SetAsync (key, byteData, options);
       return Created (String.Empty, obj);
 
