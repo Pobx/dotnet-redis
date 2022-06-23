@@ -32,7 +32,7 @@ namespace dotnet_redis {
 
       services.AddStackExchangeRedisCache (options => {
         options.Configuration = Configuration.GetConnectionString ("redis");
-        options.InstanceName = Configuration.GetValue<string> ("InstanceName");
+        // options.InstanceName = Configuration.GetValue<string> ("InstanceName");
       });
     }
 
