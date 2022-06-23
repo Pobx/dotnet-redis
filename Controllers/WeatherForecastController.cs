@@ -34,7 +34,7 @@ namespace dotnet_redis.Controllers {
     [HttpPost ("SetStringAsync")]
     public async Task<IActionResult> SetStringAsync () {
       var key = "abc";
-      var obj = new WeatherForecast { Date = DateTime.Now, TemperatureC = 1, Summary = "ABC ทดสอบ <script>alert(1)</script>" };
+      var obj = new WeatherForecast { Date = DateTime.Now, TemperatureC = 1, Summary = "ABC ทดสอบ" };
       var data = JsonSerializer.Serialize (obj);
       var options = new DistributedCacheEntryOptions ();
       options.SetSlidingExpiration (TimeSpan.FromSeconds (10));
